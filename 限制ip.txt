@@ -1,0 +1,15 @@
+deny修改`/etc/nginx/conf.d/access_mod.conf`内容如下：
+
+location ~ ^/admin.html {
+        root   /opt/app/code;
+		deny 192.168.174.1;
+		allow all;
+        index  index.html index.htm;
+    }
+
+location /nginx-status { 
+      stub_status on; 
+      access_log    /var/log/nginx/nginxstatus.log;    #设置日志文件的位置 
+      auth_basic    "nginx-status";    #指定认证机制（与location后面的内容相同即可） 
+      auth_basic_user_file    /etc/nginx/htpasswd;     #指定认证的密码文件 
+      }  
